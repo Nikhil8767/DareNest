@@ -46,3 +46,26 @@ export const getRandomDare = async (req, res) => {
 
 
 // for updating the dares only one dare will be updated at a time
+export const updateDare = async (req, res) => {
+  try {
+    const { dareId } = req.params;
+    const { text } = req.body;
+
+    if (!text || text.trim() === "") {
+      return res.status(400).json({ message: "Dare text required" });
+    }
+
+    const [result] = await db.query(
+      "UPDATE dares SET text = ? WHERE id = ?",
+      [text, dareId]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Dare not found" });
+    }
+
+    res.json({ message: "Dare updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
