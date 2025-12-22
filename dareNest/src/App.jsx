@@ -1,8 +1,8 @@
   import { useState } from 'react'
-  import reactLogo from './assets/react.svg'
-  import viteLogo from '/vite.svg'
   import './App.css'
 import Home from './components/Home'
+import { BrowserRouter as Router,Route, Routes } from 'react-router-dom'
+import Register from './components/Register'
 
   
 
@@ -10,9 +10,12 @@ import Home from './components/Home'
     const [count, setCount] = useState(0)
 
     return (
-      <>
-        <Home />
-      </>
+      <Router>
+        <Routes>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/' element={<Home/>}/>
+        </Routes>
+      </Router>
     )
   }
 
