@@ -25,6 +25,7 @@ export const register=async(req,res)=>{
 
 
 export const login =async (req,res)=>{
+    try{
     const{email,password}=req.body;
 
     const[users]=await db.query(
@@ -42,6 +43,9 @@ export const login =async (req,res)=>{
     if(!isMatch){
         return res.status(401).json({ message: "Invalid credentials" });
     }
+    else{
+        return res.json({msg:"login successfully"});
+    }
 
     const token=jwt.sign(
         {id:user.id,email:user.email},
@@ -49,4 +53,8 @@ export const login =async (req,res)=>{
         {expiresIn:"1d"}
     );
     res.json({token});
+}catch(error){
+    console.error(error);
+    res.status(500).json({message:"server error"});
+}
 };
