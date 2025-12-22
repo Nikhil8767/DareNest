@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import router from './src/routes/authRouters.js';
 import sessionRouter from './src/routes/sessionRoutes.js';
+import daresRouter from './src/routes/dares.js';
 
 const app=express()
 
@@ -16,6 +17,7 @@ app.get("/",(req,res)=>{
 })
 app.use("/api/auth",router)
 app.use("/api/select",sessionRouter)
+app.use("/api/task",daresRouter)
 
 const PORT=process.env.PORT || 5000;
 app.listen(PORT,()=>{
