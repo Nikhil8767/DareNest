@@ -20,23 +20,31 @@ export default function CoupleDare() {
   };
 
   const submitDares = async () => {
-    const token = localStorage.getItem("token");
-    const sessionId = localStorage.getItem("sessionId");
+  const token = localStorage.getItem("token");
+  const sessionId = localStorage.getItem("sessionId");
 
-    await fetch("http://localhost:5000/api/task/dares", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        sessionId,
-        dares: dares.filter(d => d.trim()),
-      }),
-    });
+  const res = await fetch("http://localhost:5000/api/task/dares", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      sessionId,
+      dares: dares.filter(d => d.trim()),
+    }),
+  });
 
-    navigate("/play");
-  };
+  const data = await res.json();
+
+  if (!res.ok) {
+    alert(data.message || "Failed to save dares");
+    return;
+  }
+
+  navigate("/play");
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-500 via-pink-600 to-red-600 px-6 relative overflow-hidden">

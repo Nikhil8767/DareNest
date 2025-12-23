@@ -1,28 +1,32 @@
 import db from '../databse/db.js'
 
-export const savesDares=async(req,res)=>{
-    try{
-        const{sessionId,dares}=req.body;
+import db from "../databse/db.js";
 
-        if(!sessionId || !Array.isArray(dares) || dares.length<1){
-            return res.status(400).json({message:"input is invalid"});
-        }
+export const savesDares = async (req, res) => {
+  try {
+    const { sessionId, dares } = req.body;
 
-        const values=dares.map(text=>[sessionId,text]);
-
-        await db.query(
-            "INSERT INTO dares(session_id,text)VALUES ?",
-            [values]
-        );
-
-        res.status(201).json({
-            message:"dares saved successfully",
-            count:dares.length,
-        });
-    }catch(error){
-        res.status(500).json({error:error.message});
+    if (!sessionId || !Array.isArray(dares) || dares.length === 0) {
+      return res.status(400).json({ message: "Invalid dare data" });
     }
+
+    // Convert sessionId to number (important)
+    const sid = Number(sessionId);
+
+    const values = dares.map(text => [sid, text]);
+
+    await db.query(
+      "INSERT INTO dares (session_id, text) VALUES ?",
+      [values]
+    );
+
+    res.status(201).json({ message: "Dares saved successfully" });
+  } catch (error) {
+    console.error("SAVE DARES ERROR:", error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
+
 
 
 export const getRandomDare = async (req, res) => {
