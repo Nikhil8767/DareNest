@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function CoupleDare() {
   const [dares, setDares] = useState(Array(10).fill(""));
   const navigate = useNavigate();
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.18; // soft romantic volume
+      audioRef.current.play().catch(() => {});
+    }
+  }, []);
 
   const handleChange = (i, value) => {
     const copy = [...dares];
@@ -31,30 +39,48 @@ export default function CoupleDare() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-500 via-rose-500 to-red-500 text-white flex items-center justify-center px-6">
-      <div className="bg-white bg-opacity-20 backdrop-blur-md p-8 rounded-2xl w-full max-w-lg shadow-xl">
-        <h1 className="text-3xl font-bold mb-2 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-500 via-pink-600 to-red-600 px-6 relative overflow-hidden">
+      
+      {/* Romantic Music */}
+      <audio ref={audioRef} loop>
+        <source src="/src/assets/romantic-music.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* Floating Hearts */}
+      <div className="absolute inset-0 pointer-events-none animate-pulse opacity-20">
+        ❤️ 💕 ❤️ 💖 💗
+      </div>
+
+      {/* Card */}
+      <div className="bg-white/20 backdrop-blur-xl p-10 rounded-3xl shadow-2xl w-full max-w-lg text-white border border-white/30">
+        
+        <h1 className="text-4xl font-bold text-center mb-2 tracking-wide">
           Couple Mode ❤️
         </h1>
-        <p className="text-sm text-center mb-6">
-          Write romantic, hot & crazy dares
+
+        <p className="text-center text-sm mb-8 text-white/90">
+          Create sweet, playful & crazy dares for each other
         </p>
 
         {dares.map((d, i) => (
           <input
             key={i}
-            placeholder={`Dare ${i + 1}`}
-            className="w-full p-2 rounded mb-3 text-black"
+            placeholder={`Romantic Dare ${i + 1}`}
+            className="w-full p-3 rounded-xl mb-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-400"
             onChange={(e) => handleChange(i, e.target.value)}
           />
         ))}
 
         <button
           onClick={submitDares}
-          className="w-full mt-4 bg-red-600 py-2 rounded-xl font-semibold hover:bg-red-700 transition"
+          className="w-full mt-6 bg-gradient-to-r from-pink-500 to-red-500 py-3 rounded-xl font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-lg"
         >
-          Begin Love Game 💕
+          Begin Your Love Game 💞
         </button>
+
+        <p className="text-xs text-center mt-4 text-white/80">
+          Let love, laughter & connection guide the game
+        </p>
       </div>
     </div>
   );

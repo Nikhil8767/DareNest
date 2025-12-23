@@ -6,8 +6,8 @@ import sessionOwnerMiddleware from "../middleware/sessionOwnerMiddleware.js";
 
 const daresRouter=express.Router();
 
-daresRouter.post("/dares",authMiddleware,sessionOwnerMiddleware, savesDares);
-daresRouter.get("/random/:sessionId",authMiddleware,sessionOwnerMiddleware ,getRandomDare);
+daresRouter.post("/dares",authMiddleware, savesDares);
+daresRouter.get("/random/:sessionId",authMiddleware, getRandomDare);
 daresRouter.put("/update/:dareId", authMiddleware,sessionOwnerMiddleware,updateDare);
 
 
