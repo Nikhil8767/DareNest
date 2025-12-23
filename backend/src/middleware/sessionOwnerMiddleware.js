@@ -4,6 +4,9 @@ const sessionOwnerMiddleware = async (req, res, next) => {
   try {
     const sessionId = req.params.sessionId || req.body.sessionId;
     const userId = req.user.id;
+    console.log("DB:", db);
+console.log("USER:", req.user);
+
 
     const [rows] = await db.query(
       "SELECT id FROM game_sessions WHERE id = ? AND user_id = ?",

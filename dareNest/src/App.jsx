@@ -5,6 +5,8 @@ import { BrowserRouter as Router,Route, Routes } from 'react-router-dom'
 import Register from './components/Register'
 import Login from './components/Login'
 import Session from './components/Session'
+import FriendsDare from './components/FriendsDare'
+import CoupleDare from './components/CoupleDare'
 
   
 
@@ -18,6 +20,8 @@ import Session from './components/Session'
           <Route path='/' element={<Home/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/session' element={<Session/>}/>
+          <Route path='/friends-dares' element={<FriendsDare/>}/>
+          <Route path='/couple-dares' element={<CoupleDare/>}/>
         </Routes>
     
     )
