@@ -3,6 +3,7 @@
 import Home from './components/Home'
 import { BrowserRouter as Router,Route, Routes } from 'react-router-dom'
 import Register from './components/Register'
+import Login from './components/Login'
 
   
 
@@ -10,12 +11,13 @@ import Register from './components/Register'
     const [count, setCount] = useState(0)
 
     return (
-      <Router>
+     
         <Routes>
           <Route path='/register' element={<Register/>}/>
           <Route path='/' element={<Home/>}/>
+          <Route path='/login' element={<Login/>}/>
         </Routes>
-      </Router>
+    
     )
   }
 
