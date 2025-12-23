@@ -43,7 +43,7 @@ export default function CoupleDare() {
       
       {/* Romantic Music */}
       <audio ref={audioRef} loop>
-        <source src="/src/assets/romantic-music.mp3" type="audio/mpeg" />
+        <source src="/src/assets/couple-music.mp3" type="audio/mpeg" />
       </audio>
 
       {/* Floating Hearts */}

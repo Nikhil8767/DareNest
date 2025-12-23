@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Session from './components/Session'
 import FriendsDare from './components/FriendsDare'
 import CoupleDare from './components/CoupleDare'
+import PlayGame from './components/PlayGame'
 
   
 
@@ -22,6 +23,7 @@ import CoupleDare from './components/CoupleDare'
           <Route path='/session' element={<Session/>}/>
           <Route path='/friends-dares' element={<FriendsDare/>}/>
           <Route path='/couple-dares' element={<CoupleDare/>}/>
+          <Route path='/play' element={<PlayGame/>}/>
         </Routes>
     
     )

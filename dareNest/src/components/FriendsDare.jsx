@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function FriendsDare() {
   const [dares, setDares] = useState(Array(10).fill(""));
   const navigate = useNavigate();
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.22; // fun but not loud
+      audioRef.current.play().catch(() => {});
+    }
+  }, []);
 
   const handleChange = (i, value) => {
     const copy = [...dares];
@@ -31,30 +39,48 @@ export default function FriendsDare() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 text-white flex items-center justify-center px-6">
-      <div className="bg-black bg-opacity-30 p-8 rounded-2xl w-full max-w-lg">
-        <h1 className="text-3xl font-bold mb-2 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 px-6 relative overflow-hidden">
+
+      {/* Fun Music */}
+      <audio ref={audioRef} loop>
+        <source src="/src/assets/friend-music.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* Floating Emojis */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 animate-pulse text-4xl flex flex-wrap gap-6 justify-center items-center">
+        🎉 😂 🔥 🎯 😜 🕺 💃 🤣
+      </div>
+
+      {/* Card */}
+      <div className="bg-white/20 backdrop-blur-xl p-10 rounded-3xl shadow-2xl w-full max-w-lg text-white border border-white/30 relative z-10">
+        
+        <h1 className="text-4xl font-extrabold text-center mb-2 tracking-wide">
           Friends Mode 🎉
         </h1>
-        <p className="text-sm text-center mb-6">
-          Write fun, crazy, and challenging dares
+
+        <p className="text-center text-sm mb-8 text-white/90">
+          Create wild, funny & unforgettable dares for your gang
         </p>
 
         {dares.map((d, i) => (
           <input
             key={i}
-            placeholder={`Dare ${i + 1}`}
-            className="w-full p-2 rounded mb-3 text-black"
+            placeholder={`Fun Dare ${i + 1}`}
+            className="w-full p-3 rounded-xl mb-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400"
             onChange={(e) => handleChange(i, e.target.value)}
           />
         ))}
 
         <button
           onClick={submitDares}
-          className="w-full mt-4 bg-yellow-400 text-black py-2 rounded-xl font-semibold hover:bg-yellow-300 transition"
+          className="w-full mt-6 bg-gradient-to-r from-yellow-400 to-orange-400 text-black py-3 rounded-xl font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-lg"
         >
-          Start Game 🚀
+          Let the Chaos Begin 🚀
         </button>
+
+        <p className="text-xs text-center mt-4 text-white/80">
+          No limits. Just fun, laughter & memories.
+        </p>
       </div>
     </div>
   );
