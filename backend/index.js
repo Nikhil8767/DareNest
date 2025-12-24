@@ -9,7 +9,19 @@ const app=express()
 
 dotenv.config();
 
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://dare-nest.vercel.app",
+      "https://dare-nest-lprty0spl-nikhilgupta042024-2977s-projects.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  })
+);
+
 app.use(express.json());
 
 app.get("/",(req,res)=>{

@@ -33,7 +33,9 @@ export default function FriendsDare() {
     const email = localStorage.getItem("email");
   const mode = localStorage.getItem("sessionType");
 
-    await fetch("http://localhost:5000/api/task/dares", {
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+    await fetch(`${API_BASE}/api/task/dares`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

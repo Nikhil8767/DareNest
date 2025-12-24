@@ -35,7 +35,8 @@ export default function Session() {
       return;
     }
 
-            const res = await fetch("http://localhost:5000/api/select/session", {
+            const API_BASE = import.meta.env.VITE_API_BASE_URL;
+            const res = await fetch(`${API_BASE}/api/select/session`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

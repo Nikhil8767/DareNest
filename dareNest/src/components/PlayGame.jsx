@@ -165,8 +165,9 @@ export default function PlayGame() {
     setLoading(true);
 
     try {
+      const API_BASE = import.meta.env.VITE_API_BASE_URL;
       const res = await fetch(
-        `http://localhost:5000/api/task/random/${sessionId}`,
+        `${API_BASE}/api/task/random/${sessionId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
