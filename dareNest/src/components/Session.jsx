@@ -28,14 +28,20 @@ export default function Session() {
     const startSession = async (type) => {
         try {
             const token = localStorage.getItem("token");
+            const email = localStorage.getItem("email");
+
+            if (!email) {
+      alert("Email not found. Please login again.");
+      return;
+    }
 
             const res = await fetch("http://localhost:5000/api/select/session", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+                    
                 },
-                body: JSON.stringify({ sessionType: type }),
+                body: JSON.stringify({ sessionType: type,email, }),
             });
 
             const data = await res.json();

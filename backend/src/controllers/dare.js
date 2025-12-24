@@ -4,19 +4,19 @@ import db from "../databse/db.js";
 
 export const savesDares = async (req, res) => {
   try {
-    const { sessionId, dares } = req.body;
+    const { sessionId, dares,email,mode } = req.body;
 
-    if (!sessionId || !Array.isArray(dares) || dares.length === 0) {
+    if (!sessionId || !email || !mode || !Array.isArray(dares) || dares.length === 0) {
       return res.status(400).json({ message: "Invalid dare data" });
     }
 
     // Convert sessionId to number (important)
     const sid = Number(sessionId);
 
-    const values = dares.map(text => [sid, text]);
+    const values = dares.map(text => [sid, text,email,mode]);
 
     await db.query(
-      "INSERT INTO dares (session_id, text) VALUES ?",
+      "INSERT INTO dares (session_id, text,user_email,mode) VALUES ?",
       [values]
     );
 

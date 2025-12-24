@@ -28,6 +28,7 @@ const Login=()=>{
       }
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("email", email);
       navigate("/session");
     } catch {
       setError("Server error");
