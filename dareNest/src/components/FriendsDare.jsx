@@ -14,10 +14,18 @@ export default function FriendsDare() {
   }, []);
 
   const handleChange = (i, value) => {
-    const copy = [...dares];
-    copy[i] = value;
-    setDares(copy);
-  };
+  setDares(prev => {
+    const updated = [...prev];
+    updated[i] = value;
+
+    // 👉 If user fills the last input, add 5 more
+    if (i === prev.length - 1 && value.trim() !== "") {
+      return [...updated, ...Array(5).fill("")];
+    }
+
+    return updated;
+  });
+};
 
   const submitDares = async () => {
     const token = localStorage.getItem("token");
