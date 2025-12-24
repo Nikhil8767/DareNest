@@ -4,5 +4,5 @@ import authMiddleware from '../middleware/authmiddleware.js';
 
 const sessionRouter=express.Router();
 
-sessionRouter.post("/session",authMiddleware,createSession);
+sessionRouter.post("/session",createSession);
 export default sessionRouter;

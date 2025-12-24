@@ -8,9 +8,11 @@
 
 // export default Home
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 export default function Home() {
   return (
+    <>
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-pink-500 text-white">
       {/* HERO SECTION */}
       <div className="flex flex-col items-center justify-center text-center px-6 py-20">
@@ -123,7 +125,12 @@ export default function Home() {
           Play Now 🚀
         </Link>
       </div>
+     
     </div>
+
+    <Footer/>
+    </>
+    
   );
 }
 
